@@ -71,8 +71,8 @@ def meme():
                    "bottom": "Bottom text"}
 
     headers = {
-        'x-rapidapi-host': "ronreiter-meme-generator.p.rapidapi.com",
-        'x-rapidapi-key': "6e87be2830mshc6af982aaf38aa5p19e324jsnbb83594f19aa"
+        'x-rapidapi-host': "-",
+        'x-rapidapi-key': "-"
     }
 
     response = requests.request("GET", url, headers=headers, params=querystring).content
@@ -82,15 +82,14 @@ def meme():
 
 
 def dowload_twitter_img(url , name):
-#     https://twitter.com/iFIHIDz/status/1246411092638793729/photo/1
-#     url = "https://pbs.twimg.com/media/EUwkRp1WkAAr8gJ.jpg"
+
 
     querystring = {"font": "Impact", "font_size": "50", "meme": "Condescending-Wonka", "top": "Top text",
                "bottom": "Bottom text"}
 
     headers = {
-    'x-rapidapi-host': "ronreiter-meme-generator.p.rapidapi.com",
-    'x-rapidapi-key': "6e87be2830mshc6af982aaf38aa5p19e324jsnbb83594f19aa"
+    'x-rapidapi-host': "-",
+    'x-rapidapi-key': "-"
 }
     fils= [f for f in listdir('./imgs_GET') if isfile(join('./imgs_GET', f))]
 
@@ -103,7 +102,7 @@ def pix_meme():
 
     # Draw some funny text on top & button of the famous Michael Jordan crying face.
     # https://pixlab.io/cmd?id=drawtext is the target command
-    req = requests.get('https://api.pixlab.io/drawtext&key=c130aaz85chm25syjx9teudef16nq7', params={
+    req = requests.get('https://api.pixlab.io/drawtext&key=', params={
         'img': 'https://pixlab.io/images/jdr.jpg',
         'top': 'someone bumps the table',
         'bottom': 'right before you win',
@@ -159,7 +158,7 @@ def log_error(e):
 
 
 def get_twitter_img_url():
-    raw_html = simple_get('https://twitter.com/iFIHIDz/status/1246410982047481856')
+    raw_html = simple_get('https://twitter.com/account/status/tweet id')
     html = BeautifulSoup(raw_html, 'html.parser')
 
 
@@ -181,7 +180,7 @@ def split_posts():
     cmnd_tag = ""
     meme_img_url = ""
 
-    raw_html = simple_get('https://twitter.com/iFIHIDz/status/1251892647872118784')
+    raw_html = simple_get('https://twitter.com/acount/status/tweet id')
     html = BeautifulSoup(raw_html, 'html.parser')
 
 
@@ -432,8 +431,8 @@ def upload_image_to_processing_service(path):
 
 
     headers = {
-        'x-rapidapi-host': "ronreiter-meme-generator.p.rapidapi.com",
-        'x-rapidapi-key': "6e87be2830mshc6af982aaf38aa5p19e324jsnbb83594f19aa",
+        'x-rapidapi-host': "-",
+        'x-rapidapi-key': "-",
 
         'content-type': "multipart/form-data"
         #'content-type': "application/json"
@@ -474,8 +473,8 @@ def get_all_images_in_rapid():
     url = "https://ronreiter-meme-generator.p.rapidapi.com/images"
 
     headers = {
-        'x-rapidapi-host': "ronreiter-meme-generator.p.rapidapi.com",
-        'x-rapidapi-key': "6e87be2830mshc6af982aaf38aa5p19e324jsnbb83594f19aa",
+        'x-rapidapi-host': "-",
+        'x-rapidapi-key': "-",
 
     }
 
@@ -722,7 +721,7 @@ def send_email(to , file , path):
 
 
 
-    fromaddr = "zeke25520@gmail.com"
+    fromaddr = ".....@gmail.com"
     toaddr = to
 
 
@@ -770,7 +769,7 @@ def send_email(to , file , path):
     s.starttls()
 
     # Authentication
-    s.login(fromaddr, "1q2345454321F")
+    s.login(fromaddr, "password")
 
     # Converts the Multipart msg into a string
     text = msg.as_string()
@@ -896,80 +895,4 @@ while True:
 
 
 
-
-
-
-exit(0)
-
-# step 1 : get all image url from tweet
-#img_urls=get_twitter_img_url()
-
-
-
-
-#step 1.5: get one tweet comnds
-raw_img_url , cmnds_type,cmnds_value=get_twitter_tweets_url()
-
-
-print (raw_img_url)
-
-
-img_urls=[]
-img_urls.append(raw_img_url)
-# step 2 : filter url to get name
-names=filter_url_get_name(img_urls)
-
-print (names)
-
-
-
-
-# step 3 : download all images and save them as as ,jpg in img_GET folder
-for img in range(len(img_urls)):
-    dowload_twitter_img(img_urls[img] ,names[img] )
-
-#
-# # step 4 : upload those images to image processing service to create meme
-#
-# fils= [f for f in listdir('./imgs_GET') if isfile(join('./imgs_GET', f))]
-#
-#
-# for f in fils:
-#     print(f)
-#     upload_image_to_processing_service('./imgs_GET/'+f)
-#
-
-
-
-
-
-
-# step 5 : request service using restful (which is creating meme)
-
-
-# step 6 : download the meme and save it
-
-
-# step 7: generate meem
-
-fils= [f for f in listdir('./imgs_GET') if isfile(join('./imgs_GET', f))]
-
-for f in fils:
-    print(f)
-    crop('./imgs_GET/'+f , f)
-
-
-fils= [f for f in listdir('./croped/') if isfile(join('./croped/', f))]
-
-for f in fils:
-    print(f)
-    generate_meme('./croped/'+f , f , cmnds_type , cmnds_value)
-
-    send_email("alhamazani.f@gmail.com",f,"./meme_generated/"+f)
-
-
-
-
-
-# step 7 : upload modified img (meme)  to twitter agine -----> I am not sure if I can do it :( as its require endpoints
 
