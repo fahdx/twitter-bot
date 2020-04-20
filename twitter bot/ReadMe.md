@@ -36,7 +36,7 @@ email:to_email@gmail.com
 
 الحجم:30
 
-email:suhail.patrulia@gmail.com
+email:to_email@gmail.com
 
 [image here]
 
